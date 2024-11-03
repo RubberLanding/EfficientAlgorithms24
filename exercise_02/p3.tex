@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+
+\begin{document}
+\noindent\textbf{a)}\\
+
+\begin{algorithm}
+\caption{Cluster Formation with Blackbox Function}
+\begin{algorithmic}[1]
+
+\STATE $clusters \leftarrow \emptyset$
+
+\FOR{each $a$ in $P$}
+    \STATE $currentCluster \leftarrow \{a\}$
+    \FOR{each $b$ in $P$}
+        \IF{$d(a, b) \leq r$}
+            \STATE $currentCluster \leftarrow currentCluster \cup \{b\}$
+        \ENDIF
+    \ENDFOR
+    \STATE $clusters \leftarrow clusters \cup currentCluster$
+\ENDFOR
+
+\STATE $result \leftarrow \text{blackbox}(\mathcal{T} = clusters, N = k)$
+\RETURN $result$
+
+\end{algorithmic}
+\end{algorithm}
+
+\bigskip  % Adds space between the two sections
+
+\noindent\textbf{b)}\\
+
+This would not be possible since the distance to the cluster center is not known prior to running the algorithm in the standard k-center problem. Therefore there is no metric we could use to assign possible cluster points to the cluster centers.
+
+\bigskip  % Adds more space before the next algorithm
+\noindent\textbf{c)}\\
+
+
+\begin{algorithm}
+\caption{Cluster Formation with known OPT}
+\begin{algorithmic}[1]
+
+\STATE $clusters \leftarrow \emptyset$
+
+\WHILE{$P \neq \emptyset$}
+    \STATE $currentCenter \leftarrow \text{some } c \in P$
+    \STATE $currentCluster \leftarrow \emptyset$
+    
+    \FOR{each $p$ in $P$}
+        \IF{$d(c, p) \leq 2OPT$}
+            \STATE $currentCluster \leftarrow currentCluster \cup \{p\}$
+        \ENDIF
+    \ENDFOR
+    
+    \STATE $clusters \leftarrow clusters \cup currentCluster$
+    \STATE $P \leftarrow P \setminus currentCluster$
+\ENDWHILE
+
+\RETURN $clusters$
+
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}
